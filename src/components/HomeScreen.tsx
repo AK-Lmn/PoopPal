@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PixelMascot } from './PixelMascot';
 import { FriendItem, MascotMood } from '../types';
 import { AppIcon } from './AppIcon';
-import { Users, Sparkles, Trophy, Settings, RotateCcw, ChevronLeft, ChevronRight, Share2, Award, Lock } from 'lucide-react';
+import { Users, Sparkles, Trophy, Settings, RotateCcw, ChevronLeft, ChevronRight, Share2, Award, Lock, Volume2, VolumeX, Sun, Moon, Home } from 'lucide-react';
 
 interface HomeScreenProps {
   todayCount: number;
@@ -19,6 +19,11 @@ interface HomeScreenProps {
   onOpenSettings: () => void;
   selectedDate: string;
   onDateChange: (dateKey: string) => void;
+  soundOn?: boolean;
+  onToggleSound?: () => void;
+  isDark?: boolean;
+  onToggleTheme?: () => void;
+  onOpenWidgetLauncher?: () => void;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
@@ -36,6 +41,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onOpenSettings,
   selectedDate,
   onDateChange,
+  soundOn = true,
+  onToggleSound,
+  isDark = false,
+  onToggleTheme,
+  onOpenWidgetLauncher,
 }) => {
   const [mascotMoodOverride, setMascotMoodOverride] = useState<MascotMood | null>(null);
 
@@ -86,6 +96,36 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </div>
 
           <div className="flex items-center gap-1.5">
+            {onToggleSound && (
+              <button
+                onClick={onToggleSound}
+                className="p-1.5 rounded-xl bg-[#FFF8E1] dark:bg-[#3E2723] text-[#5D4037] dark:text-[#FFE082] hover:bg-amber-100 border border-[#4E342E]/15 transition-all"
+                title={soundOn ? 'Mute Sound Effects' : 'Enable Sound Effects'}
+              >
+                {soundOn ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5 opacity-50" />}
+              </button>
+            )}
+
+            {onToggleTheme && (
+              <button
+                onClick={onToggleTheme}
+                className="p-1.5 rounded-xl bg-[#FFF8E1] dark:bg-[#3E2723] text-[#5D4037] dark:text-[#FFE082] hover:bg-amber-100 border border-[#4E342E]/15 transition-all"
+                title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              >
+                {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+              </button>
+            )}
+
+            {onOpenWidgetLauncher && (
+              <button
+                onClick={onOpenWidgetLauncher}
+                className="p-1.5 rounded-xl bg-[#FFF8E1] dark:bg-[#3E2723] text-[#5D4037] dark:text-[#FFE082] hover:bg-amber-100 border border-[#4E342E]/15 transition-all"
+                title="Preview Home Screen Widget Launcher"
+              >
+                <Home className="w-3.5 h-3.5" />
+              </button>
+            )}
+
             <button
               onClick={onOpenStickers}
               className="p-1.5 rounded-xl bg-[#FFF8E1] dark:bg-[#3E2723] text-[#5D4037] dark:text-[#FFE082] hover:bg-amber-100 border border-[#4E342E]/15 transition-all text-xs flex items-center gap-1 font-bold"

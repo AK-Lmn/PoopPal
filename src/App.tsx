@@ -24,6 +24,8 @@ import {
   playPlopSound,
   playCelebrationSound,
   playUndoSound,
+  getSoundEnabled,
+  setSoundEnabled,
 } from './utils/sound';
 import { triggerHaptic } from './utils/haptics';
 import { auth, db, testFirestoreConnection } from './firebase';
@@ -49,6 +51,17 @@ export default function App() {
       localStorage.setItem('pooppal_theme', 'light');
     }
   }, [isDark]);
+
+  // Sound state
+  const [soundOn, setSoundOn] = useState<boolean>(() => getSoundEnabled());
+  const handleToggleSound = () => {
+    const next = !soundOn;
+    setSoundOn(next);
+    setSoundEnabled(next);
+  };
+  const handleToggleTheme = () => {
+    setIsDark((prev) => !prev);
+  };
 
   // View state: 'app' (in-app screens) vs 'launcher' (Android home screen with Glance widgets)
   const [activeView, setActiveView] = useState<'app' | 'launcher'>('app');
@@ -484,13 +497,7 @@ export default function App() {
   };
 
   return (
-    <AndroidFrame
-      activeView={activeView}
-      onViewChange={setActiveView}
-      onReplayOnboarding={() => setIsOnboarded(false)}
-      isDark={isDark}
-      onToggleTheme={() => setIsDark(!isDark)}
-    >
+    <AndroidFrame>
       {activeView === 'launcher' ? (
         <GlanceWidgetSimulator
           todayCount={todayCount}
@@ -551,6 +558,11 @@ export default function App() {
               onOpenSettings={() => setCurrentScreen('settings')}
               selectedDate={selectedDate}
               onDateChange={setSelectedDate}
+              soundOn={soundOn}
+              onToggleSound={handleToggleSound}
+              isDark={isDark}
+              onToggleTheme={handleToggleTheme}
+              onOpenWidgetLauncher={() => setActiveView('launcher')}
             />
           )}
 
@@ -577,6 +589,12 @@ export default function App() {
               onResetData={handleResetData}
               onBack={() => setCurrentScreen('home')}
               lifetimeCount={lifetimeCount}
+              soundOn={soundOn}
+              onToggleSound={handleToggleSound}
+              isDark={isDark}
+              onToggleTheme={handleToggleTheme}
+              onOpenWidgetLauncher={() => setActiveView('launcher')}
+              onReplayOnboarding={() => setIsOnboarded(false)}
             />
           )}
         </>

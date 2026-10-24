@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone } from 'lucide-react';
+import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone, Volume2, VolumeX, Sun, Moon, Sparkles, Home } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface SettingsScreenProps {
@@ -10,6 +10,12 @@ interface SettingsScreenProps {
   onResetData: () => void;
   onBack: () => void;
   lifetimeCount: number;
+  soundOn?: boolean;
+  onToggleSound?: () => void;
+  isDark?: boolean;
+  onToggleTheme?: () => void;
+  onOpenWidgetLauncher?: () => void;
+  onReplayOnboarding?: () => void;
 }
 
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({
@@ -20,6 +26,12 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   onResetData,
   onBack,
   lifetimeCount,
+  soundOn = true,
+  onToggleSound,
+  isDark = false,
+  onToggleTheme,
+  onOpenWidgetLauncher,
+  onReplayOnboarding,
 }) => {
   const [nameInput, setNameInput] = useState(userProfile.displayName);
   const [savedName, setSavedName] = useState(false);
@@ -86,6 +98,67 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
             <div className="mt-2 text-[10px] text-[#8D6E63]">
               Your Invite Code: <strong className="font-mono text-[#4E342E] dark:text-[#FFE082]">{userProfile.inviteCode}</strong>
+            </div>
+          </div>
+
+          {/* App Preferences */}
+          <div className="p-3 bg-white dark:bg-[#2A201C] rounded-2xl border border-[#4E342E]/15 space-y-2">
+            <div className="text-[10px] font-bold text-[#8D6E63] uppercase tracking-wider mb-2">
+              App Preferences
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              {onToggleSound && (
+                <button
+                  type="button"
+                  onClick={onToggleSound}
+                  className="p-2.5 bg-[#FFF9EE] dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/10 flex items-center justify-between text-xs font-bold text-[#4E342E] dark:text-[#FFE082] hover:bg-amber-100/50 transition-colors"
+                >
+                  <span className="flex items-center gap-1.5">
+                    {soundOn ? <Volume2 className="w-4 h-4 text-amber-600" /> : <VolumeX className="w-4 h-4 opacity-50" />}
+                    <span>Sound</span>
+                  </span>
+                  <span className="text-[10px] text-[#8D6E63]">{soundOn ? 'On' : 'Muted'}</span>
+                </button>
+              )}
+
+              {onToggleTheme && (
+                <button
+                  type="button"
+                  onClick={onToggleTheme}
+                  className="p-2.5 bg-[#FFF9EE] dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/10 flex items-center justify-between text-xs font-bold text-[#4E342E] dark:text-[#FFE082] hover:bg-amber-100/50 transition-colors"
+                >
+                  <span className="flex items-center gap-1.5">
+                    {isDark ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-[#5D4037]" />}
+                    <span>Theme</span>
+                  </span>
+                  <span className="text-[10px] text-[#8D6E63]">{isDark ? 'Dark' : 'Light'}</span>
+                </button>
+              )}
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-1">
+              {onOpenWidgetLauncher && (
+                <button
+                  type="button"
+                  onClick={onOpenWidgetLauncher}
+                  className="p-2 bg-[#FFF9EE] dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/10 flex items-center justify-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFE082] hover:bg-amber-100/50 transition-colors"
+                >
+                  <Home className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Widget Mode</span>
+                </button>
+              )}
+
+              {onReplayOnboarding && (
+                <button
+                  type="button"
+                  onClick={onReplayOnboarding}
+                  className="p-2 bg-[#FFF9EE] dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/10 flex items-center justify-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFE082] hover:bg-amber-100/50 transition-colors"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Tutorial</span>
+                </button>
+              )}
             </div>
           </div>
 
