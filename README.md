@@ -9,12 +9,7 @@
     <a href="#download--installation-android">
       <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Platform: Android" />
     </a>
-    <a href="LICENSE">
-      <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square" alt="License: Apache 2.0" />
-    </a>
-    <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
-    <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 19" />
-    <img src="https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Status-Active_Release-blue?style=flat-square" alt="Status: Active Release" />
   </p>
 </div>
 
@@ -81,78 +76,6 @@ PoopPal is distributed directly as an Android application package (`.apk`).
 
 ---
 
-## Repository Structure
-
-```text
-PoopPal/
-├── .github/              # Continuous integration and build workflows
-├── public/               # Public static assets, icons, and verification files
-│   ├── .well-known/      # Digital Asset Links for Android verification
-│   └── icons/            # App launcher icons and splash assets
-├── src/
-│   ├── components/       # Core UI views and screens
-│   │   ├── AndroidFrame.tsx          # Mobile layout and system bar container
-│   │   ├── BuddyDisplay.tsx          # 16-bit animated pixel pet renderer
-│   │   ├── LogModal.tsx              # Daily habit logging modal
-│   │   ├── PalsScreen.tsx            # Real-time paired friend manager
-│   │   ├── SettingsScreen.tsx        # Audio, theme, and account settings
-│   │   └── WidgetSimulator.tsx       # Companion widget preview and launcher
-│   ├── data/             # Static datasets, tips, and mock pal profiles
-│   ├── types/            # TypeScript interfaces and data models
-│   ├── utils/            # Audio synthesizer, date helpers, and sound effects
-│   ├── App.tsx           # Primary application router and state coordinator
-│   └── firebase.ts       # Firebase initialization and authentication layer
-├── firestore.rules       # Granular Firestore security access rules
-├── package.json          # Project dependencies and script declarations
-├── tsconfig.json         # TypeScript compiler configuration
-└── vite.config.ts        # Vite configuration and path aliases
-```
-
----
-
-## Developer Setup
-
-### Prerequisites
-
-- **Node.js**: Version 20.x or higher
-- **npm**: Version 10.x or higher
-
-### Local Development
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/AK-Lmn/PoopPal.git
-   cd PoopPal
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the local development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:3000`.
-
-### Production Build
-
-To compile and bundle the application:
-
-```bash
-npm run build
-```
-
-The compiled output will be generated inside the `dist/` directory. You can preview the production bundle locally with:
-
-```bash
-npm run preview
-```
-
----
-
 ## Security & Privacy Model
 
 PoopPal follows strict data minimization principles:
@@ -163,20 +86,8 @@ PoopPal follows strict data minimization principles:
 
 ---
 
-## Contributing
+## Copyright & License
 
-Contributions are welcome. If you would like to report an issue or propose a feature:
+Copyright 2026 PoopPal. All rights reserved.
 
-1. Fork the repository.
-2. Create a dedicated feature branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes with clear, descriptive commit messages adhering to standard Developer Certificate of Origin (DCO) signoffs.
-4. Push to your branch and open a Pull Request against `main`.
-
----
-
-## License
-
-This project is licensed under the **Apache License, Version 2.0**. See the [LICENSE](LICENSE) file for complete details.
+Unauthorized copying, modification, distribution, or commercial use of this software and associated media assets, via any medium, is strictly prohibited.
