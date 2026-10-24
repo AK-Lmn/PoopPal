@@ -10,6 +10,7 @@
   "display": "standalone",
   "display_override": [
     "window-controls-overlay",
+    "tabbed",
     "standalone",
     "minimal-ui"
   ],
@@ -113,6 +114,9 @@
   "scope_extensions": [
     {
       "origin": "https://pooppal-rho.vercel.app"
+    },
+    {
+      "origin": "https://pooppal.vercel.app"
     }
   ],
   "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
@@ -126,7 +130,13 @@
     }
   },
   "prefer_related_applications": false,
-  "related_applications": [],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.pooppal.app",
+      "id": "com.pooppal.app"
+    }
+  ],
   "edge_side_panel": {
     "preferred_width": 420
   },
