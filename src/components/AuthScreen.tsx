@@ -5,7 +5,7 @@ import {
   googleProvider,
   handleFirestoreError,
   OperationType,
-} from '../firebase';
+} from '../services/firebase';
 import {
   signInWithPopup,
   signInWithEmailAndPassword,

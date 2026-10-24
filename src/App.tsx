@@ -28,7 +28,7 @@ import {
   setSoundEnabled,
 } from './utils/sound';
 import { triggerHaptic } from './utils/haptics';
-import { auth, db, testFirestoreConnection } from './firebase';
+import { auth, db, testFirestoreConnection } from './services/firebase';
 import { onAuthStateChanged, signOut, User as FirebaseUser } from 'firebase/auth';
 import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
 
