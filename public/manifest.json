@@ -1,12 +1,27 @@
 {
+  "id": "/?source=pwa",
   "name": "PoopPal",
   "short_name": "PoopPal",
   "description": "A retro 16-bit pixel buddy social poop counter with paired friend sync and home-screen widget simulator.",
+  "lang": "en",
+  "dir": "ltr",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait",
   "background_color": "#FFF9EE",
   "theme_color": "#4E342E",
-  "orientation": "portrait",
+  "categories": [
+    "health",
+    "lifestyle",
+    "social",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "/icon-192.png",
@@ -25,6 +40,94 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "PoopPal Mobile Dashboard & Paired Buddy View"
+    },
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "PoopPal Desktop Device Simulator and Glance Widgets"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Log Poop",
+      "short_name": "Log",
+      "description": "Quickly log today's flush with one tap",
+      "url": "/?action=log",
+      "icons": [
+        {
+          "src": "/shortcut-log.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Paired Buddy",
+      "short_name": "Buddy",
+      "description": "Check your paired friend's daily count",
+      "url": "/?action=friends",
+      "icons": [
+        {
+          "src": "/shortcut-friends.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "navigate-existing",
+      "auto"
+    ]
+  },
+  "share_target": {
+    "action": "/?action=share",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "edge_side_panel": {
+    "preferred_width": 420
+  },
+  "widgets": [
+    {
+      "name": "PoopPal Counter",
+      "description": "Track joint logs with your paired buddy right on your home screen",
+      "tag": "pooppal-counter",
+      "template": "widget-counter",
+      "ms_ac_template": "widgets/counter.json",
+      "data": "/api/widget-data",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/screenshot-mobile.png",
+          "sizes": "540x960",
+          "label": "PoopPal Home Widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }

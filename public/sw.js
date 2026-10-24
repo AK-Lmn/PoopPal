@@ -1,11 +1,16 @@
-const CACHE_NAME = 'pooppal-v1';
+const CACHE_NAME = 'pooppal-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json',
   '/app-icon.svg',
   '/icon-192.png',
-  '/icon-512.png'
+  '/icon-512.png',
+  '/icon-maskable.png',
+  '/shortcut-log.png',
+  '/shortcut-friends.png',
+  '/screenshot-mobile.png',
+  '/screenshot-desktop.png'
 ];
 
 self.addEventListener('install', (event) => {
