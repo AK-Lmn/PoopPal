@@ -2,12 +2,13 @@
   <h1>PoopPal</h1>
 
   <p>
-    A retro 16-bit pixel buddy habit counter for Android featuring real-time friend synchronization, companion home widgets, and procedural retro sound effects.
+    A retro 16-bit pixel buddy habit counter for mobile (Android & iOS) featuring real-time friend synchronization, companion home widgets, and procedural retro sound effects.
   </p>
 
   <p>
-    <a href="#download--installation-android">
+    <a href="#download--installation">
       <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Platform: Android" />
+      <img src="https://img.shields.io/badge/Platform-iOS-000000?style=flat-square&logo=apple&logoColor=white" alt="Platform: iOS" />
     </a>
     <img src="https://img.shields.io/badge/Status-Active_Release-blue?style=flat-square" alt="Status: Active Release" />
   </p>
@@ -19,7 +20,7 @@
 
 PoopPal is a retro-styled daily digestive habit tracking application built around a reactive 16-bit virtual pet. It transforms daily routine logging into an engaging experience with custom pixel art animations, real-time cooperative buddy synchronization, and an interactive home-screen companion widget.
 
-Designed from the ground up for mobile devices, PoopPal delivers a lightweight, responsive interface with strict privacy controls and offline-first capabilities.
+Designed from the ground up for mobile devices across Android and iOS, PoopPal delivers a lightweight, responsive interface with strict privacy controls and offline-first capabilities.
 
 ---
 
@@ -34,11 +35,9 @@ Designed from the ground up for mobile devices, PoopPal delivers a lightweight, 
 
 ---
 
-## Download & Installation (Android)
+## Download & Installation
 
-PoopPal is distributed directly as an Android application package (`.apk`).
-
-### Quick Start via GitHub Releases
+### Android (`.apk`)
 
 1. Navigate to the **[Releases](https://github.com/AK-Lmn/PoopPal/releases)** tab of this repository.
 2. Under the latest release **Assets**, download `PoopPal.apk`.
@@ -48,14 +47,24 @@ PoopPal is distributed directly as an Android application package (`.apk`).
    - Return to the installer and tap **Install**.
 5. Launch **PoopPal** from your app drawer.
 
+### iOS (Xcode Project)
+
+The native iOS application workspace is located in the [`ios/`](ios/) directory:
+
+1. Open `ios/PoopPal.xcworkspace` in Xcode on macOS.
+2. Select the target device (connected iPhone/iPad or iOS Simulator).
+3. In **Signing & Capabilities**, select your Apple Developer Team.
+4. Press **Cmd + R** to build and run the application.
+
 ---
 
 ## Architecture & Tech Stack
 
 ```text
 +--------------------------------------------------------------+
-|                       PoopPal Android                        |
+|                     PoopPal Mobile App                       |
 +--------------------------------------------------------------+
+| Platforms         | Android Package (.apk) & iOS (Xcode)     |
 | UI Layer          | React 19, Tailwind CSS v4, Lucide Icons  |
 | State Management  | React Hooks, LocalStorage Cache Fallback |
 | Audio Generation  | Web Audio API (Synthesized Chiptune)     |
