@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.vercel.pooppal_rho.twa",
+        "sha256_cert_fingerprints": ["9C:FB:C3:C9:65:27:24:FD:C2:7F:A5:FA:FA:94:E8:F6:D2:65:F1:FF:33:B9:34:A8:40:EB:11:84:1F:A5:D0:CE"]
+      }
+    }]
