@@ -92,6 +92,30 @@
       "auto"
     ]
   },
+  "file_handlers": [
+    {
+      "action": "/?action=open-file",
+      "name": "PoopPal Backup Data",
+      "accept": {
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+pooppal",
+      "url": "/?code=%s"
+    }
+  ],
+  "note_taking": {
+    "new_note_url": "/?action=log"
+  },
+  "scope_extensions": [
+    {
+      "origin": "https://pooppal-rho.vercel.app"
+    }
+  ],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "share_target": {
     "action": "/?action=share",
     "method": "GET",
