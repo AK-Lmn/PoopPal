@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.font-pixel {
+  font-family: 'Silkscreen', 'Press Start 2P', monospace;
+  letter-spacing: -0.05em;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Custom retro pixel borders and shadows */
+.pixel-box-shadow {
+  box-shadow: 0 4px 0 0 rgba(78, 52, 46, 0.8), 0 0 0 2px #4E342E;
+}
+
+.pixel-box-shadow-sm {
+  box-shadow: 0 2px 0 0 rgba(78, 52, 46, 0.8), 0 0 0 1.5px #4E342E;
+}
+
+.pixel-box-shadow-active {
+  box-shadow: 0 0 0 2px #4E342E;
+  transform: translateY(3px);
+}
