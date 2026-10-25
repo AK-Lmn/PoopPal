@@ -9,3 +9,4 @@ coverage/
 
 .vercel
 brag-output/
+backend/firebase-applet-config.json
