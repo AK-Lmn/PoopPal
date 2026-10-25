@@ -2,7 +2,7 @@
   <h1>PoopPal</h1>
 
   <p>
-    A retro 16-bit pixel buddy habit counter for Android featuring real-time friend synchronization, companion home widgets, and procedural retro sound effects.
+    A retro 16-bit pixel buddy habit counter for Android featuring real-time friend synchronization, cooperative milestones, and procedural retro sound effects.
   </p>
 
   <p>
@@ -17,7 +17,7 @@
 
 ## Overview
 
-PoopPal is a retro-styled daily digestive habit tracking application built around a reactive 16-bit virtual pet. It transforms daily routine logging into an engaging experience with custom pixel art animations, real-time cooperative buddy synchronization, and an interactive home-screen companion widget.
+PoopPal is a retro-styled daily digestive habit tracking application built around a reactive 16-bit virtual pet. It transforms daily routine logging into an engaging experience with custom pixel art animations, real-time cooperative buddy synchronization, and tactile feedback.
 
 Designed from the ground up for mobile devices, PoopPal delivers a lightweight, responsive interface with strict privacy controls and offline-first capabilities.
 
@@ -27,7 +27,7 @@ Designed from the ground up for mobile devices, PoopPal delivers a lightweight, 
 
 - **Reactive 16-Bit Pixel Buddy**: An animated virtual companion that reflects daily wellness metrics through expressive mood states, status badges, and hydration/fiber levels.
 - **Real-Time Pal Pairing**: Connect with a partner or friend using anonymous six-character invite codes. View live daily count updates and celebrate mutual milestones in real time.
-- **Companion Home Widget**: A dedicated compact widget interface that can be placed or docked on screen to display real-time dual buddy statuses and quick-log triggers.
+- **Duo Pal Status & Reaction Cheer**: Keep track of your paired buddy's daily habits side-by-side with instant cheering reactions.
 - **Procedural 8-Bit Audio Engine**: Dynamic sound effects generated programmatically via the Web Audio API without requiring bulky external audio file assets.
 - **Privacy-First Architecture**: No phone numbers, contacts, or real names are ever collected or indexed. Users pair exclusively through random cryptographic identifiers.
 - **Dark & Light Visual Themes**: Full theme support with high-contrast retro palettes optimized for mobile OLED screens and daylight readability.

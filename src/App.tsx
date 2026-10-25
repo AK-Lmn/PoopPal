@@ -9,7 +9,6 @@ import { AndroidFrame } from './components/AndroidFrame';
 import { HomeScreen } from './components/HomeScreen';
 import { FriendsScreen } from './components/FriendsScreen';
 import { SettingsScreen } from './components/SettingsScreen';
-import { GlanceWidgetSimulator } from './components/GlanceWidgetSimulator';
 import { OnboardingScreen } from './components/OnboardingScreen';
 import { AuthScreen } from './components/AuthScreen';
 import { AddFriendModal } from './components/AddFriendModal';
@@ -63,8 +62,7 @@ export default function App() {
     setIsDark((prev) => !prev);
   };
 
-  // View state: 'app' (in-app screens) vs 'launcher' (Android home screen with Glance widgets)
-  const [activeView, setActiveView] = useState<'app' | 'launcher'>('app');
+  // Current screen state
   const [currentScreen, setCurrentScreen] = useState<'home' | 'friends' | 'settings'>('home');
 
   // Modal states
@@ -498,16 +496,7 @@ export default function App() {
 
   return (
     <AndroidFrame>
-      {activeView === 'launcher' ? (
-        <GlanceWidgetSimulator
-          todayCount={todayCount}
-          pairedFriend={pairedFriend}
-          friends={friends}
-          onSelectPairedFriend={handleSetPairedFriend}
-          onLogPoop={handleLogPoop}
-          onOpenApp={() => setActiveView('app')}
-        />
-      ) : !currentUser && !isDemoMode ? (
+      {!currentUser && !isDemoMode ? (
         <AuthScreen
           onAuthSuccess={() => {
             setIsDemoMode(false);
@@ -562,7 +551,6 @@ export default function App() {
               onToggleSound={handleToggleSound}
               isDark={isDark}
               onToggleTheme={handleToggleTheme}
-              onOpenWidgetLauncher={() => setActiveView('launcher')}
             />
           )}
 
@@ -593,7 +581,6 @@ export default function App() {
               onToggleSound={handleToggleSound}
               isDark={isDark}
               onToggleTheme={handleToggleTheme}
-              onOpenWidgetLauncher={() => setActiveView('launcher')}
               onReplayOnboarding={() => setIsOnboarded(false)}
             />
           )}

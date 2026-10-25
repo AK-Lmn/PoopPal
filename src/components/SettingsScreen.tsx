@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone, Volume2, VolumeX, Sun, Moon, Sparkles, Home } from 'lucide-react';
+import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone, Volume2, VolumeX, Sun, Moon, Sparkles } from 'lucide-react';
 import { UserProfile } from '../types';
 
 interface SettingsScreenProps {
@@ -14,7 +14,6 @@ interface SettingsScreenProps {
   onToggleSound?: () => void;
   isDark?: boolean;
   onToggleTheme?: () => void;
-  onOpenWidgetLauncher?: () => void;
   onReplayOnboarding?: () => void;
 }
 
@@ -30,7 +29,6 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   onToggleSound,
   isDark = false,
   onToggleTheme,
-  onOpenWidgetLauncher,
   onReplayOnboarding,
 }) => {
   const [nameInput, setNameInput] = useState(userProfile.displayName);
@@ -137,29 +135,18 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               )}
             </div>
 
-            <div className="grid grid-cols-2 gap-2 pt-1">
-              {onOpenWidgetLauncher && (
-                <button
-                  type="button"
-                  onClick={onOpenWidgetLauncher}
-                  className="p-2 bg-[#FFF9EE] dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/10 flex items-center justify-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFE082] hover:bg-amber-100/50 transition-colors"
-                >
-                  <Home className="w-3.5 h-3.5 text-amber-600" />
-                  <span>Widget Mode</span>
-                </button>
-              )}
-
-              {onReplayOnboarding && (
+            {onReplayOnboarding && (
+              <div className="pt-1">
                 <button
                   type="button"
                   onClick={onReplayOnboarding}
-                  className="p-2 bg-[#FFF9EE] dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/10 flex items-center justify-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFE082] hover:bg-amber-100/50 transition-colors"
+                  className="w-full p-2 bg-[#FFF9EE] dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/10 flex items-center justify-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFE082] hover:bg-amber-100/50 transition-colors"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-                  <span>Tutorial</span>
+                  <span>Replay Tutorial / Onboarding</span>
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* 2. Personal Private Stats */}

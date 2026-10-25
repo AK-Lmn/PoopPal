@@ -67,11 +67,11 @@ export const FriendsScreen: React.FC<FriendsScreenProps> = ({
           </button>
         </div>
 
-        {/* 1. Active Paired Widget Pal Showcase */}
+        {/* 1. Active Paired Buddy Showcase */}
         <div className="my-3 bg-[#FFE082]/35 dark:bg-[#3E2723] p-3.5 rounded-3xl border-2 border-[#5D4037] shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[10px] font-pixel bg-[#5D4037] text-white px-2 py-0.5 rounded uppercase">
-              Home Screen Widget Duo
+              Featured Buddy Duo
             </span>
             <span className="text-[10px] text-[#8D6E63] font-bold">Live Synced</span>
           </div>
@@ -114,7 +114,7 @@ export const FriendsScreen: React.FC<FriendsScreenProps> = ({
             </div>
           ) : (
             <p className="text-xs text-[#8D6E63] text-center py-2">
-              Select a friend below to feature on your home-screen widget.
+              Select a friend below to feature as your primary synced buddy.
             </p>
           )}
         </div>
@@ -186,7 +186,7 @@ export const FriendsScreen: React.FC<FriendsScreenProps> = ({
                           ? 'bg-emerald-600 text-white'
                           : 'bg-[#FFF9EE] dark:bg-[#3E2723] text-[#5D4037] dark:text-[#FFE082] hover:bg-amber-100 border border-[#4E342E]/20'
                       }`}
-                      title={isPaired ? 'Currently paired on widget' : 'Pair to widget'}
+                      title={isPaired ? 'Currently paired buddy' : 'Pair as primary buddy'}
                     >
                       {isPaired ? (
                         <>
@@ -194,7 +194,7 @@ export const FriendsScreen: React.FC<FriendsScreenProps> = ({
                           <span>Paired</span>
                         </>
                       ) : (
-                        <span>Pair to Widget</span>
+                        <span>Pair Buddy</span>
                       )}
                     </button>
 
@@ -255,7 +255,7 @@ export const FriendsScreen: React.FC<FriendsScreenProps> = ({
                 No Friends Added Yet
               </div>
               <p className="text-[10px] text-[#8D6E63] max-w-[200px] mx-auto mt-1 mb-3">
-                Share your invite code or enter a friend&apos;s code to pair your home widgets!
+                Share your invite code or enter a friend&apos;s code to pair up and sync!
               </p>
               <button
                 onClick={onOpenAddFriend}

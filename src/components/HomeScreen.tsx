@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PixelMascot } from './PixelMascot';
 import { FriendItem, MascotMood } from '../types';
 import { AppIcon } from './AppIcon';
-import { Users, Sparkles, Trophy, Settings, RotateCcw, ChevronLeft, ChevronRight, Share2, Award, Lock, Volume2, VolumeX, Sun, Moon, Home } from 'lucide-react';
+import { Users, Sparkles, Trophy, Settings, RotateCcw, ChevronLeft, ChevronRight, Share2, Award, Lock, Volume2, VolumeX, Sun, Moon } from 'lucide-react';
 
 interface HomeScreenProps {
   todayCount: number;
@@ -23,7 +23,6 @@ interface HomeScreenProps {
   onToggleSound?: () => void;
   isDark?: boolean;
   onToggleTheme?: () => void;
-  onOpenWidgetLauncher?: () => void;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
@@ -45,7 +44,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onToggleSound,
   isDark = false,
   onToggleTheme,
-  onOpenWidgetLauncher,
 }) => {
   const [mascotMoodOverride, setMascotMoodOverride] = useState<MascotMood | null>(null);
 
@@ -113,16 +111,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
               >
                 {isDark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-              </button>
-            )}
-
-            {onOpenWidgetLauncher && (
-              <button
-                onClick={onOpenWidgetLauncher}
-                className="p-1.5 rounded-xl bg-[#FFF8E1] dark:bg-[#3E2723] text-[#5D4037] dark:text-[#FFE082] hover:bg-amber-100 border border-[#4E342E]/15 transition-all"
-                title="Preview Home Screen Widget Launcher"
-              >
-                <Home className="w-3.5 h-3.5" />
               </button>
             )}
 
@@ -262,12 +250,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <span>{isDebouncing ? 'LOGGING...' : 'I POOPED!'}</span>
         </button>
 
-        {/* Paired Pal Widget Live Status (Widgetable-style) */}
+        {/* Paired Buddy Live Status */}
         <div className="bg-[#FFF9EE] dark:bg-[#2A201C] p-3 rounded-2xl border border-[#4E342E]/15">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">
               <Users className="w-3.5 h-3.5 text-[#5D4037]" />
-              <span>Paired Home Widget Pal</span>
+              <span>Paired Buddy Sync</span>
             </div>
             <button
               onClick={onOpenFriends}
@@ -289,7 +277,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                     <div className="text-xs font-bold text-[#4E342E] dark:text-[#EFEBE9]">
                       {pairedFriend.displayName}
                     </div>
-                    <div className="text-[10px] text-[#8D6E63]">Paired on your home widget</div>
+                    <div className="text-[10px] text-[#8D6E63]">Live synced duo buddy</div>
                   </div>
                 </div>
 
@@ -321,11 +309,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           ) : (
             <div className="p-3 text-center bg-white/60 dark:bg-black/20 rounded-xl">
               <div className="text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">
-                No Friend Paired to Widget
+                No Paired Buddy Selected
               </div>
               <p className="text-[10px] text-[#8D6E63] mt-0.5 mb-2">
-                Pair with a friend to show both of your daily logs together on your phone&apos;s home
-                screen.
+                Pair with a friend to sync daily milestones and celebrate goals together.
               </p>
               <button
                 onClick={onOpenFriends}

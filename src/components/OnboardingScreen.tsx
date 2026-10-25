@@ -115,7 +115,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
               </h2>
               <p className="text-xs text-[#795548] dark:text-[#D7CCC8] leading-relaxed">
                 Your cute 16-bit virtual buddy for tracking daily flushes and syncing with your best
-                friend&apos;s home-screen widget!
+                friends and pals!
               </p>
             </div>
 
@@ -127,7 +127,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
               <ul className="text-[11px] text-[#795548] dark:text-[#BCAAA4] space-y-1 list-disc list-inside">
                 <li>Log each flush with a single tactile tap</li>
                 <li>Pair with a friend to compare today&apos;s counts together</li>
-                <li>Interactive Android Glance widgets for your launcher</li>
+                <li>Real-time duo buddy sync and reactions</li>
                 <li>Zero-leak privacy: only today&apos;s total is ever visible</li>
               </ul>
             </div>
@@ -142,7 +142,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
                 Name Your Pal
               </h2>
               <p className="text-xs text-[#795548] dark:text-[#D7CCC8]">
-                How should friends see you on their home widget?
+                How should friends see you on their buddy feed?
               </p>
             </div>
 
@@ -201,7 +201,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
                 Your Secret Code
               </h2>
               <p className="text-xs text-[#795548] dark:text-[#D7CCC8]">
-                Share this with your friends to pair widgets instantly.
+                Share this with your friends to pair up instantly.
               </p>
             </div>
 
@@ -233,15 +233,15 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
           </div>
         )}
 
-        {/* STEP 4: WIDGET PAIRING SETUP */}
+        {/* STEP 4: BUDDY PAIRING SETUP */}
         {step === 4 && (
           <div className="flex flex-col items-center text-center space-y-3 py-2 animate-in fade-in zoom-in-95 duration-200">
             <div className="space-y-1">
               <h2 className="text-xl font-black font-pixel text-[#4E342E] dark:text-[#FFE082]">
-                Pair Your Widget
+                Pair with a Pal
               </h2>
               <p className="text-xs text-[#795548] dark:text-[#D7CCC8]">
-                How would you like to set up your home-screen duo widget?
+                How would you like to get started with friend sync?
               </p>
             </div>
 
@@ -263,7 +263,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
                     Pair with SammySitz (Recommended)
                   </div>
                   <div className="text-[10px] text-[#8D6E63]">
-                    Instant live preview of the paired home widget
+                    Instant live preview of duo buddy sync
                   </div>
                 </div>
               </div>
