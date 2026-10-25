@@ -185,6 +185,13 @@ export default function App() {
               inviteCode: data.inviteCode || prev.inviteCode,
               pairedFriendUid: data.pairedFriendUid || prev.pairedFriendUid,
             }));
+            // Existing cloud account is already onboarded
+            setIsOnboarded(true);
+            try {
+              localStorage.setItem('pooppal_onboarded', 'true');
+            } catch {
+              // ignore
+            }
           } else {
             const initialCode = fbUser.uid.slice(0, 6).toUpperCase();
             await setDoc(userDocRef, {
@@ -402,11 +409,13 @@ export default function App() {
     setDailyCounts({ [todayKey]: 0 });
     setFriends(INITIAL_FRIENDS);
     setPendingRequests([]);
-    setIsOnboarded(false);
-    try {
-      localStorage.removeItem('pooppal_onboarded');
-    } catch {
-      // ignore
+    if (!currentUser) {
+      setIsOnboarded(false);
+      try {
+        localStorage.removeItem('pooppal_onboarded');
+      } catch {
+        // ignore
+      }
     }
     if (currentUser) {
       setDoc(
@@ -516,8 +525,16 @@ export default function App() {
     <AndroidFrame>
       {!currentUser && !isDemoMode ? (
         <AuthScreen
-          onAuthSuccess={() => {
+          onAuthSuccess={(_user, isExistingUser) => {
             setIsDemoMode(false);
+            if (isExistingUser) {
+              setIsOnboarded(true);
+              try {
+                localStorage.setItem('pooppal_onboarded', 'true');
+              } catch {
+                // ignore
+              }
+            }
           }}
           onSkipDemo={() => {
             setIsDemoMode(true);
@@ -538,6 +555,17 @@ export default function App() {
               localStorage.setItem('pooppal_onboarded', 'true');
             } catch {
               // ignore
+            }
+            if (currentUser) {
+              setDoc(
+                doc(db, 'users', currentUser.uid),
+                {
+                  onboarded: true,
+                  displayName: newProfile.displayName,
+                  updatedAt: Date.now(),
+                },
+                { merge: true }
+              ).catch((e) => console.warn('Could not save onboarded state:', e));
             }
             setDailyCounts({ [getTodayDateKey()]: 0 });
             if (pairedUid) {

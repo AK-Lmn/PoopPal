@@ -23,7 +23,7 @@ import {
 import { playPlopSound, playCelebrationSound } from '../utils/sound';
 
 interface AuthScreenProps {
-  onAuthSuccess: (user: { uid: string; email: string | null; displayName: string | null }) => void;
+  onAuthSuccess: (user: { uid: string; email: string | null; displayName: string | null }, isExistingUser?: boolean) => void;
   onSkipDemo?: () => void;
 }
 
@@ -68,7 +68,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           uid: userCred.user.uid,
           email: userCred.user.email,
           displayName: displayName.trim() || userCred.user.email?.split('@')[0] || 'PoopPal',
-        });
+        }, false);
       } else {
         const userCred = await signInWithEmailAndPassword(auth, email.trim(), password);
         playCelebrationSound();
@@ -76,7 +76,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           uid: userCred.user.uid,
           email: userCred.user.email,
           displayName: userCred.user.displayName || userCred.user.email?.split('@')[0] || 'PoopPal',
-        });
+        }, true);
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -108,7 +108,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         uid: userCred.user.uid,
         email: userCred.user.email,
         displayName: userCred.user.displayName || 'PoopPal',
-      });
+      }, true);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
       if (msg.includes('auth/unauthorized-domain')) {
