@@ -1,15 +1,20 @@
 <div align="center">
+  <img src="public/app-icon.svg" alt="PoopPal Logo" width="128" height="128" />
+
   <h1>PoopPal</h1>
 
   <p>
-    A retro 16-bit pixel buddy habit counter for Android featuring real-time friend synchronization, cooperative milestones, and procedural retro sound effects.
+    A retro 16-bit pixel buddy habit counter for Android featuring real-time friend synchronization, native home widgets, system pull-down tiles, and procedural retro sound effects.
   </p>
 
   <p>
     <a href="#download--installation">
       <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Platform: Android" />
     </a>
-    <img src="https://img.shields.io/badge/Status-Active_Release-blue?style=flat-square" alt="Status: Active Release" />
+    <a href="https://github.com/AK-Lmn/PoopPal/releases/tag/v1.0.0">
+      <img src="https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square" alt="Release: v1.0.0" />
+    </a>
+    <img src="https://img.shields.io/badge/Status-Active_Production-success?style=flat-square" alt="Status: Active Production" />
   </p>
 </div>
 
@@ -17,7 +22,7 @@
 
 ## Overview
 
-PoopPal is a retro-styled daily digestive habit tracking application built around a reactive 16-bit virtual pet. It transforms daily routine logging into an engaging experience with custom pixel art animations, real-time cooperative buddy synchronization, and tactile feedback.
+PoopPal is a retro-styled daily digestive habit tracking application built around a reactive 16-bit virtual pet. It transforms daily routine logging into an engaging experience with custom pixel art animations, real-time cooperative buddy synchronization, native Android home screen widgets, and quick pull-down notification shade actions.
 
 Designed from the ground up for mobile devices, PoopPal delivers a lightweight, responsive interface with strict privacy controls and offline-first capabilities.
 
@@ -25,8 +30,11 @@ Designed from the ground up for mobile devices, PoopPal delivers a lightweight, 
 
 ## Key Features
 
-- **Reactive 16-Bit Pixel Buddy**: An animated virtual companion that reflects daily wellness metrics through expressive mood states, status badges, and hydration/fiber levels.
-- **Real-Time Pal Pairing**: Connect with a partner or friend using anonymous six-character invite codes. View live daily count updates and celebrate mutual milestones in real time.
+- **Reactive 16-Bit Pixel Buddy**: An animated virtual companion ("Sir Poops-a-Lot") that reflects daily wellness metrics through expressive mood states, status badges, and hydration/fiber levels.
+- **Native Android Home Screen Widget**: An interactive 2x2 companion widget that places your buddy and 1-tap logging directly on your device home screen.
+- **Quick Settings Pull-Down Tile**: System notification shade tile (`PoopPal Log`) for instant background logging with system toast confirmation without opening the full app.
+- **Launcher Long-Press Shortcuts**: Fast app shortcuts ("Log Flush Now" and "View Paired Pal") accessible directly by long-pressing the app icon.
+- **Real-Time Pal Pairing**: Connect with a partner or friend using anonymous 6-character invite codes. View live daily count updates and celebrate mutual milestones in real time.
 - **Duo Pal Status & Reaction Cheer**: Keep track of your paired buddy's daily habits side-by-side with instant cheering reactions.
 - **Procedural 8-Bit Audio Engine**: Dynamic sound effects generated programmatically via the Web Audio API without requiring bulky external audio file assets.
 - **Privacy-First Architecture**: No phone numbers, contacts, or real names are ever collected or indexed. Users pair exclusively through random cryptographic identifiers.
