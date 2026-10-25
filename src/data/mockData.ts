@@ -13,48 +13,11 @@ export const DEFAULT_USER: UserProfile = {
   displayName: 'PixelPooper',
   avatarId: 'mascot_classic',
   inviteCode: 'POOP-77',
-  pairedFriendUid: 'friend_sam',
+  pairedFriendUid: undefined,
   createdAt: Date.now(),
 };
 
-export const INITIAL_FRIENDS: FriendItem[] = [
-  {
-    uid: 'friend_sam',
-    displayName: 'SammySitz',
-    avatarId: 'mascot_coffee',
-    todayCount: 3,
-    statusBadge: 'Paired Widget Pal',
-    lastReactionIcon: 'Trophy',
-    isOnline: true,
-    isPaired: true,
-  },
-  {
-    uid: 'friend_mia',
-    displayName: 'Mia_Flush',
-    avatarId: 'mascot_zen',
-    todayCount: 2,
-    statusBadge: 'Fiber Fiend',
-    lastReactionIcon: 'Sparkles',
-    isOnline: true,
-  },
-  {
-    uid: 'friend_leo',
-    displayName: 'Leo_TacoTuesday',
-    avatarId: 'mascot_turbo',
-    todayCount: 1,
-    statusBadge: 'Routine Champ',
-    lastReactionIcon: 'Zap',
-    isOnline: false,
-  },
-  {
-    uid: 'friend_chloe',
-    displayName: 'ChloeCrown',
-    avatarId: 'mascot_royal',
-    todayCount: 0,
-    statusBadge: 'Rest Day',
-    isOnline: true,
-  },
-];
+export const INITIAL_FRIENDS: FriendItem[] = [];
 
 export const STICKER_PACK: Sticker[] = [
   {

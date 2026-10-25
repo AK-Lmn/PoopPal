@@ -82,7 +82,14 @@ export default function App() {
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
     try {
       const saved = localStorage.getItem('pooppal_user_profile');
-      return saved ? JSON.parse(saved) : DEFAULT_USER;
+      if (saved) {
+        const parsed: UserProfile = JSON.parse(saved);
+        if (parsed.pairedFriendUid === 'friend_sam') {
+          parsed.pairedFriendUid = undefined;
+        }
+        return parsed;
+      }
+      return DEFAULT_USER;
     } catch {
       return DEFAULT_USER;
     }
@@ -101,11 +108,22 @@ export default function App() {
   // Selected date key for inspection (default today)
   const [selectedDate, setSelectedDate] = useState<string>(getTodayDateKey());
 
-  // Friends state
+  // Friends state (scrubs legacy mock friends if present)
   const [friends, setFriends] = useState<FriendItem[]>(() => {
     try {
       const saved = localStorage.getItem('pooppal_friends');
-      return saved ? JSON.parse(saved) : INITIAL_FRIENDS;
+      if (saved) {
+        const parsed: FriendItem[] = JSON.parse(saved);
+        return parsed.filter(
+          (f) =>
+            f.uid !== 'friend_sam' &&
+            f.displayName !== 'SammySitz' &&
+            f.uid !== 'friend_mia' &&
+            f.uid !== 'friend_leo' &&
+            f.uid !== 'friend_chloe'
+        );
+      }
+      return INITIAL_FRIENDS;
     } catch {
       return INITIAL_FRIENDS;
     }

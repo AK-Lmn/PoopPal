@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone, Volume2, VolumeX, Sun, Moon, Sparkles } from 'lucide-react';
+import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone, Volume2, VolumeX, Sun, Moon, Sparkles, LayoutGrid, X } from 'lucide-react';
 import { UserProfile } from '../types';
+import { AppIcon } from './AppIcon';
 
 interface SettingsScreenProps {
   userProfile: UserProfile;
@@ -34,6 +35,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   const [nameInput, setNameInput] = useState(userProfile.displayName);
   const [savedName, setSavedName] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
+  const [showWidgetGuide, setShowWidgetGuide] = useState(false);
 
   const handleSaveName = (e: React.FormEvent) => {
     e.preventDefault();
@@ -149,6 +151,47 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             )}
           </div>
 
+          {/* Home Screen & Widgets */}
+          <div className="p-3 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-2xl border-2 border-[#4E342E]/20 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFE082]">
+                <Smartphone className="w-4 h-4 text-amber-600" />
+                <span>Add to Home Screen &amp; Widgets</span>
+              </div>
+              <span className="text-[9px] font-bold bg-amber-200 dark:bg-amber-900/60 text-[#4E342E] dark:text-[#FFE082] px-2 py-0.5 rounded-full border border-amber-300">
+                Android Widget
+              </span>
+            </div>
+
+            <p className="text-[11px] text-[#795548] dark:text-[#D7CCC8] leading-relaxed">
+              Place the PoopPal companion widget directly on your phone&apos;s home screen for instant one-tap tracking!
+            </p>
+
+            {/* Widget Preview Box */}
+            <div className="p-2.5 bg-white dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/15 flex items-center justify-between shadow-xs">
+              <div className="flex items-center gap-2.5">
+                <AppIcon size={38} showBadge={false} />
+                <div>
+                  <div className="text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">PoopPal Companion</div>
+                  <div className="text-[10px] text-[#8D6E63]">2x2 Android Home Widget</div>
+                </div>
+              </div>
+
+              <div className="px-2.5 py-1 bg-[#5D4037] text-white rounded-lg text-[10px] font-bold">
+                I POOPED!
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowWidgetGuide(true)}
+              className="w-full py-2 bg-[#5D4037] hover:bg-[#4E342E] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span>How to Add Widget to Home Screen</span>
+            </button>
+          </div>
+
           {/* 2. Personal Private Stats */}
           <div className="p-3 bg-white dark:bg-[#2A201C] rounded-2xl border border-[#4E342E]/15">
             <div className="text-[10px] font-bold text-[#8D6E63] uppercase tracking-wider mb-2">
@@ -253,6 +296,73 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           </button>
         )}
       </div>
+
+      {/* Widget Guide Modal */}
+      {showWidgetGuide && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
+          <div className="w-full max-w-sm bg-[#FFFDF7] dark:bg-[#201815] rounded-3xl p-5 border-2 border-[#4E342E] shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-[#4E342E]/10">
+              <div className="flex items-center gap-2">
+                <LayoutGrid className="w-4 h-4 text-amber-600" />
+                <span className="text-sm font-bold font-pixel text-[#4E342E] dark:text-[#FFE082]">
+                  Add PoopPal Widget
+                </span>
+              </div>
+              <button
+                onClick={() => setShowWidgetGuide(false)}
+                className="p-1 rounded-full hover:bg-[#4E342E]/10 text-[#8D6E63] transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-3 text-xs text-[#5D4037] dark:text-[#D7CCC8]">
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  1
+                </span>
+                <p>
+                  Go to your Android phone or emulator <strong>Home Screen</strong>.
+                </p>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  2
+                </span>
+                <p>
+                  <strong>Press and hold (long-press)</strong> any empty space on your wallpaper.
+                </p>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  3
+                </span>
+                <p>
+                  Tap the <strong>Widgets</strong> icon from the popup menu at the bottom.
+                </p>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  4
+                </span>
+                <p>
+                  Scroll down to <strong>PoopPal</strong>, touch and drag the widget onto your home screen!
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowWidgetGuide(false)}
+              className="w-full py-2.5 bg-[#5D4037] hover:bg-[#4E342E] text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
+            >
+              Got It
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

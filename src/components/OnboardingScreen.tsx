@@ -26,7 +26,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [displayName, setDisplayName] = useState('NewPooper');
   const [selectedMood, setSelectedMood] = useState<MascotMood>('ready');
-  const [pairChoice, setPairChoice] = useState<'demo' | 'code' | 'solo'>('demo');
+  const [pairChoice, setPairChoice] = useState<'code' | 'solo'>('solo');
   const [customFriendCode, setCustomFriendCode] = useState('');
   const [copiedCode, setCopiedCode] = useState(false);
 
@@ -53,10 +53,10 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
       displayName: displayName.trim() || 'PoopPal',
       avatarId: 'mascot_classic',
       inviteCode: defaultInviteCode,
-      pairedFriendUid: pairChoice === 'demo' ? 'friend_sam' : undefined,
+      pairedFriendUid: undefined,
       createdAt: Date.now(),
     };
-    onComplete(finalProfile, pairChoice === 'demo' ? 'friend_sam' : undefined);
+    onComplete(finalProfile, undefined);
   };
 
   const handleCopyCode = () => {
@@ -238,45 +238,14 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
           <div className="flex flex-col items-center text-center space-y-3 py-2 animate-in fade-in zoom-in-95 duration-200">
             <div className="space-y-1">
               <h2 className="text-xl font-black font-pixel text-[#4E342E] dark:text-[#FFE082]">
-                Pair with a Pal
+                Get Started
               </h2>
               <p className="text-xs text-[#795548] dark:text-[#D7CCC8]">
-                How would you like to get started with friend sync?
+                How would you like to start tracking today?
               </p>
             </div>
 
-            {/* Choice 1: Pair with Sample Pal */}
-            <div
-              onClick={() => setPairChoice('demo')}
-              className={`w-full max-w-xs p-3 rounded-2xl border-2 cursor-pointer transition-all text-left flex items-center justify-between ${
-                pairChoice === 'demo'
-                  ? 'bg-[#FFE082]/30 dark:bg-[#3E2723] border-[#5D4037] shadow-sm'
-                  : 'bg-white dark:bg-[#2A201C] border-[#4E342E]/15'
-              }`}
-            >
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#FFE082] flex items-center justify-center text-[#4E342E]">
-                  <Heart className="w-4 h-4 text-amber-700 fill-amber-500" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">
-                    Pair with SammySitz (Recommended)
-                  </div>
-                  <div className="text-[10px] text-[#8D6E63]">
-                    Instant live preview of duo buddy sync
-                  </div>
-                </div>
-              </div>
-              <div
-                className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                  pairChoice === 'demo' ? 'border-[#5D4037] bg-[#5D4037]' : 'border-slate-300'
-                }`}
-              >
-                {pairChoice === 'demo' && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
-              </div>
-            </div>
-
-            {/* Choice 2: Start Solo */}
+            {/* Choice 1: Start Solo */}
             <div
               onClick={() => setPairChoice('solo')}
               className={`w-full max-w-xs p-3 rounded-2xl border-2 cursor-pointer transition-all text-left flex items-center justify-between ${
@@ -286,15 +255,15 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
               }`}
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-amber-50 dark:bg-[#3E2723] flex items-center justify-center text-[#5D4037]">
-                  <User className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-xl bg-[#FFE082] flex items-center justify-center text-[#4E342E]">
+                  <Sparkles className="w-4 h-4 text-amber-700" />
                 </div>
                 <div>
                   <div className="text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">
-                    Start Solo First
+                    Start Solo First (Recommended)
                   </div>
                   <div className="text-[10px] text-[#8D6E63]">
-                    Track your own flushes; pair with a friend later
+                    Track your own flushes; pair friends anytime
                   </div>
                 </div>
               </div>
@@ -307,8 +276,55 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({
               </div>
             </div>
 
+            {/* Choice 2: I Have a Friend's Code */}
+            <div
+              onClick={() => setPairChoice('code')}
+              className={`w-full max-w-xs p-3 rounded-2xl border-2 cursor-pointer transition-all text-left space-y-2 ${
+                pairChoice === 'code'
+                  ? 'bg-[#FFE082]/30 dark:bg-[#3E2723] border-[#5D4037] shadow-sm'
+                  : 'bg-white dark:bg-[#2A201C] border-[#4E342E]/15'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-amber-50 dark:bg-[#3E2723] flex items-center justify-center text-[#5D4037]">
+                    <User className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">
+                      I Have a Friend&apos;s Code
+                    </div>
+                    <div className="text-[10px] text-[#8D6E63]">
+                      Connect directly using their invite code
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                    pairChoice === 'code' ? 'border-[#5D4037] bg-[#5D4037]' : 'border-slate-300'
+                  }`}
+                >
+                  {pairChoice === 'code' && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
+                </div>
+              </div>
+
+              {pairChoice === 'code' && (
+                <div className="pt-1">
+                  <input
+                    type="text"
+                    value={customFriendCode}
+                    onChange={(e) => setCustomFriendCode(e.target.value.toUpperCase())}
+                    placeholder="Enter Code (e.g. POOP-88)"
+                    maxLength={10}
+                    className="w-full px-3 py-1.5 bg-white dark:bg-[#1A1412] border border-[#4E342E]/20 rounded-xl text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1] tracking-wider uppercase font-mono"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </div>
+              )}
+            </div>
+
             <div className="p-2.5 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-2xl border border-[#4E342E]/15 text-[10px] text-[#795548] dark:text-[#BCAAA4]">
-              You can change or add pals at any time from the Pals &amp; Pairing tab!
+              You can exchange invite codes anytime from the Pals &amp; Pairing tab!
             </div>
           </div>
         )}
