@@ -56,13 +56,12 @@ PoopPal is distributed directly as an Android application package (`.apk`).
 +--------------------------------------------------------------+
 |                     PoopPal Android App                      |
 +--------------------------------------------------------------+
-| Platforms         | Android Application Package (.apk)       |
+| Runtime           | Capacitor Native Standalone Android APK  |
 | UI Layer          | React 19, Tailwind CSS v4, Lucide Icons  |
 | State Management  | React Hooks, LocalStorage Cache Fallback |
 | Audio Generation  | Web Audio API (Synthesized Chiptune)     |
 | Real-Time Sync    | Firebase Firestore Real-Time Listeners   |
-| Authentication    | Firebase Auth (Anonymous / Google Auth)  |
-| Bundler & Runtime | Vite 8, Modern ECMAScript Modules        |
+| Offline Support   | 100% Embedded Local Assets (No Web Host) |
 +--------------------------------------------------------------+
 ```
 

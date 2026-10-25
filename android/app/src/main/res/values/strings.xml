@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PoopPal</string>
+    <string name="title_activity_main">PoopPal</string>
+    <string name="package_name">com.pooppal.app</string>
+    <string name="custom_url_scheme">com.pooppal.app</string>
+</resources>
