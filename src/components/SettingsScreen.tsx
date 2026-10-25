@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone, Volume2, VolumeX, Sun, Moon, Sparkles, LayoutGrid, X } from 'lucide-react';
+import { ChevronLeft, ShieldCheck, RefreshCw, Trash2, Check, User, Info, Smartphone, Volume2, VolumeX, Sun, Moon, Sparkles, LayoutGrid, X, Zap, Sliders, Users } from 'lucide-react';
 import { UserProfile } from '../types';
 import { AppIcon } from './AppIcon';
 
@@ -36,6 +36,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   const [savedName, setSavedName] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
   const [showWidgetGuide, setShowWidgetGuide] = useState(false);
+  const [showTileGuide, setShowTileGuide] = useState(false);
 
   const handleSaveName = (e: React.FormEvent) => {
     e.preventDefault();
@@ -189,6 +190,50 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
             >
               <LayoutGrid className="w-3.5 h-3.5" />
               <span>How to Add Widget to Home Screen</span>
+            </button>
+          </div>
+
+          {/* Quick Access & Android Shortcuts */}
+          <div className="p-3 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-2xl border-2 border-[#4E342E]/20 space-y-2.5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#4E342E] dark:text-[#FFE082]">
+                <Zap className="w-4 h-4 text-amber-600" />
+                <span>Quick Access &amp; Android Shortcuts</span>
+              </div>
+              <span className="text-[9px] font-bold bg-amber-200 dark:bg-amber-900/60 text-[#4E342E] dark:text-[#FFE082] px-2 py-0.5 rounded-full border border-amber-300">
+                Power Features
+              </span>
+            </div>
+
+            <p className="text-[11px] text-[#795548] dark:text-[#D7CCC8] leading-relaxed">
+              Log in seconds without navigating menus using Android launcher long-press shortcuts and notification shade tiles.
+            </p>
+
+            {/* Launcher Shortcuts Showcase */}
+            <div className="p-2.5 bg-white dark:bg-[#1A1412] rounded-xl border border-[#4E342E]/15 space-y-1.5">
+              <div className="text-[10px] font-bold text-[#8D6E63] uppercase tracking-wider">
+                App Icon Long-Press Menu
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">
+                <div className="p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-lg border border-[#4E342E]/10 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <span>Log Flush Now</span>
+                </div>
+                <div className="p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-lg border border-[#4E342E]/10 flex items-center gap-1.5">
+                  <Users className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                  <span>View Paired Pal</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Settings Tile Button */}
+            <button
+              type="button"
+              onClick={() => setShowTileGuide(true)}
+              className="w-full py-2 bg-[#5D4037] hover:bg-[#4E342E] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>Enable Quick Settings Pull-Down Tile</span>
             </button>
           </div>
 
@@ -356,6 +401,73 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
             <button
               onClick={() => setShowWidgetGuide(false)}
+              className="w-full py-2.5 bg-[#5D4037] hover:bg-[#4E342E] text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
+            >
+              Got It
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Quick Settings Tile Guide Modal */}
+      {showTileGuide && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in">
+          <div className="w-full max-w-sm bg-[#FFFDF7] dark:bg-[#201815] rounded-3xl p-5 border-2 border-[#4E342E] shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-[#4E342E]/10">
+              <div className="flex items-center gap-2">
+                <Sliders className="w-4 h-4 text-amber-600" />
+                <span className="text-sm font-bold font-pixel text-[#4E342E] dark:text-[#FFE082]">
+                  Quick Settings Tile Setup
+                </span>
+              </div>
+              <button
+                onClick={() => setShowTileGuide(false)}
+                className="p-1 rounded-full hover:bg-[#4E342E]/10 text-[#8D6E63] transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-3 text-xs text-[#5D4037] dark:text-[#D7CCC8]">
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  1
+                </span>
+                <p>
+                  Swipe down <strong>twice</strong> from the top of your Android screen to open full Quick Settings.
+                </p>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  2
+                </span>
+                <p>
+                  Tap the <strong>Edit (pencil)</strong> button at the bottom or corner of the panel.
+                </p>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  3
+                </span>
+                <p>
+                  Find <strong>PoopPal Log</strong> in the available tiles list.
+                </p>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2 bg-[#FFF9EE] dark:bg-[#2A201C] rounded-xl border border-[#4E342E]/10">
+                <span className="w-5 h-5 rounded-full bg-[#5D4037] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                  4
+                </span>
+                <p>
+                  Touch and drag the tile into your <strong>active Quick Settings</strong>. Tap it anytime for instant background logging with a system toast!
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowTileGuide(false)}
               className="w-full py-2.5 bg-[#5D4037] hover:bg-[#4E342E] text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
             >
               Got It

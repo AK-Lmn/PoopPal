@@ -4,4 +4,9 @@
     <string name="title_activity_main">PoopPal</string>
     <string name="package_name">com.pooppal.app</string>
     <string name="custom_url_scheme">com.pooppal.app</string>
+    <string name="shortcut_log_short">Log Flush</string>
+    <string name="shortcut_log_long">Log Flush Now</string>
+    <string name="shortcut_friends_short">Paired Pal</string>
+    <string name="shortcut_friends_long">View Paired Pal</string>
+    <string name="tile_label">PoopPal Log</string>
 </resources>

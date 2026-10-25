@@ -30,6 +30,16 @@ import { triggerHaptic } from './utils/haptics';
 import { auth, db, testFirestoreConnection } from './services/firebase';
 import { onAuthStateChanged, signOut, User as FirebaseUser } from 'firebase/auth';
 import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
+import { App as CapApp } from '@capacitor/app';
+
+declare global {
+  interface Window {
+    AndroidNative?: {
+      getTileCount: (dateKey: string) => number;
+      clearTileCount: (dateKey: string) => void;
+    };
+  }
+}
 
 export default function App() {
   // Theme state
@@ -375,6 +385,77 @@ export default function App() {
       ).catch((err) => console.warn('Could not sync undo to Firestore:', err));
     }
   };
+
+  // Synchronize any background logs made via Android Quick Settings Tile
+  const syncTileCount = () => {
+    if (window.AndroidNative?.getTileCount) {
+      const tileLogs = window.AndroidNative.getTileCount(todayKey);
+      if (tileLogs > 0) {
+        window.AndroidNative.clearTileCount(todayKey);
+        setDailyCounts((prev) => {
+          const current = prev[todayKey] || 0;
+          const updated = current + tileLogs;
+          if (currentUser) {
+            setDoc(
+              doc(db, 'dailyCounts', `${currentUser.uid}_${todayKey}`),
+              {
+                uid: currentUser.uid,
+                dateKey: todayKey,
+                count: updated,
+                updatedAt: Date.now(),
+              },
+              { merge: true }
+            ).catch(() => {});
+          }
+          return { ...prev, [todayKey]: updated };
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    syncTileCount();
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        syncTileCount();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [todayKey, currentUser]);
+
+  // Deep Link & Android App Launcher Shortcuts Handler
+  useEffect(() => {
+    const processDeepLink = (urlStr: string) => {
+      if (!urlStr) return;
+      if (urlStr.includes('action/log') || urlStr.includes('action=log')) {
+        setCurrentScreen('home');
+        handleLogPoop();
+      } else if (urlStr.includes('action/friends') || urlStr.includes('action=friends')) {
+        setCurrentScreen('friends');
+      }
+    };
+
+    // Check initial launch URL
+    processDeepLink(window.location.href);
+
+    // Listen to Android Native custom event
+    const handleCustomDeepLink = (e: Event) => {
+      const customEvent = e as CustomEvent<string>;
+      processDeepLink(customEvent.detail);
+    };
+    window.addEventListener('pooppal-deeplink', handleCustomDeepLink);
+
+    // Listen to Capacitor native appUrlOpen
+    const urlListener = CapApp.addListener('appUrlOpen', (event) => {
+      processDeepLink(event.url);
+    });
+
+    return () => {
+      window.removeEventListener('pooppal-deeplink', handleCustomDeepLink);
+      urlListener.then((sub) => sub.remove()).catch(() => {});
+    };
+  }, []);
 
   // Update display name
   const handleUpdateDisplayName = async (name: string) => {
