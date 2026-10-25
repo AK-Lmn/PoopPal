@@ -86,6 +86,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
         setErrorMsg('Invalid email or password.');
       } else if (msg.includes('auth/weak-password')) {
         setErrorMsg('Password is too weak. Must be at least 8 characters.');
+      } else if (msg.includes('auth/unauthorized-domain')) {
+        setErrorMsg('Domain not authorized in Firebase Console. You can play in Local Mode below or authorize your domain.');
       } else {
         setErrorMsg(msg.replace('Firebase: ', ''));
       }
@@ -109,7 +111,11 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
       });
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      setErrorMsg(msg.replace('Firebase: ', ''));
+      if (msg.includes('auth/unauthorized-domain')) {
+        setErrorMsg('Domain not authorized in Firebase Console. You can play in Local Mode below or authorize your domain.');
+      } else {
+        setErrorMsg(msg.replace('Firebase: ', ''));
+      }
     } finally {
       setIsLoading(false);
     }
@@ -287,13 +293,14 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
 
       {/* Local Mode fallback */}
       {onSkipDemo && (
-        <div className="pt-2 text-center">
+        <div className="pt-3 pb-1 text-center">
           <button
             type="button"
             onClick={onSkipDemo}
-            className="text-[10px] text-[#8D6E63] hover:text-[#4E342E] hover:underline font-bold"
+            className="w-full py-2.5 px-4 bg-[#FFF8E1] dark:bg-[#2A201C] hover:bg-amber-100 dark:hover:bg-[#3E2723] text-[#5D4037] dark:text-[#FFE082] rounded-2xl border-2 border-[#4E342E]/20 text-xs font-pixel font-bold flex items-center justify-center gap-2 transition-all active:scale-98 shadow-xs"
           >
-            Or continue in Local Demo Mode
+            <span>Play in Local Mode (No Account Needed)</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
       )}
