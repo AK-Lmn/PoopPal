@@ -37,7 +37,7 @@ service cloud.firestore {
         && incoming().displayName.size() <= 64;
       allow update: if isOwner(userId)
         && incoming().uid == existing().uid
-        && incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'avatarId', 'pairedFriendUid', 'updatedAt']);
+        && incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'avatarId', 'pairedFriendUid', 'onboarded', 'updatedAt']);
       allow delete: if isOwner(userId);
     }
 

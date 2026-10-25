@@ -1,0 +1,89 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // 1. User profiles
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isOwner(userId)
+        && incoming().uid == request.auth.uid
+        && incoming().keys().hasAll(['uid', 'displayName', 'inviteCode', 'createdAt'])
+        && incoming().displayName is string
+        && incoming().displayName.size() <= 64;
+      allow update: if isOwner(userId)
+        && incoming().uid == existing().uid
+        && incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'avatarId', 'pairedFriendUid', 'onboarded', 'updatedAt']);
+      allow delete: if isOwner(userId);
+    }
+
+    // 2. Aggregate Daily Counts (Zero-leak privacy: only aggregate counts)
+    match /dailyCounts/{countId} {
+      allow read: if isSignedIn() && (
+        isOwner(resource.data.uid) ||
+        // Friends can read today's aggregate count
+        resource.data.dateKey is string
+      );
+
+      allow create: if isSignedIn()
+        && incoming().uid == request.auth.uid
+        && incoming().keys().hasAll(['uid', 'dateKey', 'count', 'updatedAt'])
+        && incoming().count is number
+        && incoming().count >= 0;
+
+      allow update: if isSignedIn()
+        && existing().uid == request.auth.uid
+        && incoming().uid == request.auth.uid
+        && incoming().diff(existing()).affectedKeys().hasOnly(['count', 'updatedAt'])
+        && incoming().count is number
+        && incoming().count >= 0;
+
+      allow delete: if isSignedIn() && existing().uid == request.auth.uid;
+    }
+
+    // 3. Friendships
+    match /friendships/{friendshipId} {
+      allow read: if isSignedIn() && (request.auth.uid in resource.data.memberUids);
+      allow create: if isSignedIn() && (request.auth.uid in incoming().memberUids);
+      allow update, delete: if isSignedIn() && (request.auth.uid in resource.data.memberUids);
+    }
+
+    // 4. Friend Requests
+    match /friendRequests/{requestId} {
+      allow read: if isSignedIn() && (
+        request.auth.uid == resource.data.senderUid ||
+        request.auth.uid == resource.data.recipientUid
+      );
+      allow create: if isSignedIn() && incoming().senderUid == request.auth.uid;
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn() && (
+        request.auth.uid == resource.data.senderUid ||
+        request.auth.uid == resource.data.recipientUid
+      );
+    }
+  }
+}
