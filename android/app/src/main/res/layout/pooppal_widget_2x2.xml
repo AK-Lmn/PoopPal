@@ -47,11 +47,18 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+        <!-- User Column -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:contentDescription="You"
+                android:src="@drawable/mascot_buddy" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,15 +74,16 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="#4E342E"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- Center Heart -->
         <FrameLayout
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/widget_circle_gold">
 
             <TextView
@@ -87,11 +95,18 @@
                 android:textSize="11sp" />
         </FrameLayout>
 
+        <!-- Partner Column -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:contentDescription="Partner"
+                android:src="@drawable/mascot_partner_crown" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:text="3"
                 android:textColor="#4E342E"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -130,10 +145,10 @@
         android:id="@+id/widget_compact_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/widget_button_bg"
         android:gravity="center"
-        android:padding="6dp"
+        android:padding="5dp"
         android:text="+ Log Poop"
         android:textColor="#FFF8E1"
         android:textSize="10sp"

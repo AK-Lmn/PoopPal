@@ -93,12 +93,24 @@ public class MainActivity extends BridgeActivity {
 
             try {
                 AppWidgetManager manager = AppWidgetManager.getInstance(context);
-                ComponentName thisWidget = new ComponentName(context, PoopPalWidgetProvider.class);
-                int[] allIds = manager.getAppWidgetIds(thisWidget);
-                if (allIds != null && allIds.length > 0) {
+
+                // Update 4x2 wide widgets
+                ComponentName wideWidget = new ComponentName(context, PoopPalWidgetProvider.class);
+                int[] wideIds = manager.getAppWidgetIds(wideWidget);
+                if (wideIds != null && wideIds.length > 0) {
                     Intent intent = new Intent(context, PoopPalWidgetProvider.class);
                     intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, allIds);
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, wideIds);
+                    context.sendBroadcast(intent);
+                }
+
+                // Update 2x2 compact widgets
+                ComponentName compactWidget = new ComponentName(context, PoopPalCompactWidgetProvider.class);
+                int[] compactIds = manager.getAppWidgetIds(compactWidget);
+                if (compactIds != null && compactIds.length > 0) {
+                    Intent intent = new Intent(context, PoopPalCompactWidgetProvider.class);
+                    intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, compactIds);
                     context.sendBroadcast(intent);
                 }
             } catch (Exception e) {

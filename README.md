@@ -14,8 +14,8 @@
     <a href="#ios-installation-via-altstore-classic">
       <img src="https://img.shields.io/badge/Platform-iOS-000000?style=flat-square&logo=apple&logoColor=white" alt="Platform: iOS" />
     </a>
-    <a href="https://github.com/AK-Lmn/PoopPal/releases/tag/v1.0.0">
-      <img src="https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square" alt="Release: v1.0.0" />
+    <a href="https://github.com/AK-Lmn/PoopPal/releases/tag/v1.1.0">
+      <img src="https://img.shields.io/badge/Release-v1.1.0-blue?style=flat-square" alt="Release: v1.1.0" />
     </a>
     <img src="https://img.shields.io/badge/Status-Active_Production-success?style=flat-square" alt="Status: Active Production" />
   </p>

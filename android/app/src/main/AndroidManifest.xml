@@ -45,9 +45,10 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
 
-        <!-- PoopPal Home Screen AppWidget Receiver -->
+        <!-- PoopPal 4x2 Paired Friend Widget Receiver -->
         <receiver
             android:name=".PoopPalWidgetProvider"
+            android:label="@string/widget_4x2_name"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -56,6 +57,20 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/pooppal_widget_info" />
+        </receiver>
+
+        <!-- PoopPal 2x2 Compact Duo Widget Receiver -->
+        <receiver
+            android:name=".PoopPalCompactWidgetProvider"
+            android:label="@string/widget_2x2_name"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.pooppal.app.ACTION_LOG_FLUSH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pooppal_widget_2x2_info" />
         </receiver>
 
         <!-- PoopPal Quick Settings Pull-Down Tile Service -->

@@ -5,6 +5,9 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build APK
@@ -59,3 +62,19 @@ jobs:
         with:
           name: PoopPal-APK
           path: android/app/build/outputs/apk/debug/PoopPal.apk
+
+      - name: Update GitHub Release Assets
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.1.0
+          name: PoopPal v1.1.0 - Paired Duo Home Screen Widgets & Live Sync
+          body: |
+            ### What's New in v1.1.0:
+            - **4x2 Paired Friend Home Screen Widget**: Live companion widget displaying joint daily flush metrics, pixel mascot companion with partner crown, and 1-tap quick logging.
+            - **2x2 Compact Duo Widget**: Dedicated 2x2 home screen widget with side-by-side counts and 1-tap logging.
+            - **Live Android Sync**: Background flushes logged via the widget or notification tile synchronize automatically with the app and Firestore.
+            - **Eliminated Auth Flash**: Added authentication gate and loading splash preventing sign-in screen flashes on app launch.
+          files: android/app/build/outputs/apk/debug/PoopPal.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
