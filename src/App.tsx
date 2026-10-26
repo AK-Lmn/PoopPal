@@ -13,6 +13,7 @@ import { OnboardingScreen } from './components/OnboardingScreen';
 import { AuthScreen } from './components/AuthScreen';
 import { AddFriendModal } from './components/AddFriendModal';
 import { StickersAndChallengesModal } from './components/StickersAndChallengesModal';
+import { PixelMascot } from './components/PixelMascot';
 import { UserProfile, FriendItem, FriendRequest } from './types';
 import {
   DEFAULT_USER,
@@ -37,6 +38,7 @@ declare global {
     AndroidNative?: {
       getTileCount: (dateKey: string) => number;
       clearTileCount: (dateKey: string) => void;
+      updateWidgetData?: (dateKey: string, userCount: number, partnerCount: number, partnerName: string) => void;
     };
   }
 }
@@ -151,6 +153,7 @@ export default function App() {
 
   // Firebase Authentication & Cloud Sync
   const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState<boolean>(true);
   const [isDemoMode, setIsDemoMode] = useState<boolean>(() => {
     try {
       return localStorage.getItem('pooppal_demo_mode') === 'true';
@@ -172,58 +175,80 @@ export default function App() {
   // Listen to Firebase Auth state
   useEffect(() => {
     testFirestoreConnection().catch(() => {});
-    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
-      setCurrentUser(fbUser);
-      if (fbUser) {
-        setIsDemoMode(false);
-        try {
-          localStorage.removeItem('pooppal_demo_mode');
-        } catch {
-          // ignore
-        }
 
-        // Sync or initialize user profile document in Firestore
-        try {
-          const userDocRef = doc(db, 'users', fbUser.uid);
-          const snap = await getDoc(userDocRef);
-          if (snap.exists()) {
-            const data = snap.data();
-            setUserProfile((prev) => ({
-              ...prev,
-              uid: fbUser.uid,
-              displayName: data.displayName || fbUser.displayName || prev.displayName,
-              inviteCode: data.inviteCode || prev.inviteCode,
-              pairedFriendUid: data.pairedFriendUid || prev.pairedFriendUid,
-            }));
-            // Existing cloud account is already onboarded
-            setIsOnboarded(true);
-            try {
-              localStorage.setItem('pooppal_onboarded', 'true');
-            } catch {
-              // ignore
-            }
-          } else {
-            const initialCode = fbUser.uid.slice(0, 6).toUpperCase();
-            await setDoc(userDocRef, {
-              uid: fbUser.uid,
-              displayName: fbUser.displayName || fbUser.email?.split('@')[0] || 'PoopPal',
-              inviteCode: initialCode,
-              createdAt: Date.now(),
-            });
-            setUserProfile((prev) => ({
-              ...prev,
-              uid: fbUser.uid,
-              displayName: fbUser.displayName || fbUser.email?.split('@')[0] || prev.displayName,
-              inviteCode: initialCode,
-            }));
+    // Safety timeout so user is never stuck on splash screen if offline
+    const safetyTimer = setTimeout(() => {
+      setIsAuthLoading(false);
+    }, 2500);
+
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
+      try {
+        if (fbUser) {
+          setCurrentUser(fbUser);
+          setIsDemoMode(false);
+          try {
+            localStorage.setItem('pooppal_has_session', 'true');
+            localStorage.removeItem('pooppal_demo_mode');
+          } catch {
+            // ignore
           }
-        } catch (e) {
-          console.warn('Could not sync user profile with Firestore:', e);
+
+          // Sync or initialize user profile document in Firestore
+          try {
+            const userDocRef = doc(db, 'users', fbUser.uid);
+            const snap = await getDoc(userDocRef);
+            if (snap.exists()) {
+              const data = snap.data();
+              setUserProfile((prev) => ({
+                ...prev,
+                uid: fbUser.uid,
+                displayName: data.displayName || fbUser.displayName || prev.displayName,
+                inviteCode: data.inviteCode || prev.inviteCode,
+                pairedFriendUid: data.pairedFriendUid || prev.pairedFriendUid,
+              }));
+              // Existing cloud account is already onboarded
+              setIsOnboarded(true);
+              try {
+                localStorage.setItem('pooppal_onboarded', 'true');
+              } catch {
+                // ignore
+              }
+            } else {
+              const initialCode = fbUser.uid.slice(0, 6).toUpperCase();
+              await setDoc(userDocRef, {
+                uid: fbUser.uid,
+                displayName: fbUser.displayName || fbUser.email?.split('@')[0] || 'PoopPal',
+                inviteCode: initialCode,
+                createdAt: Date.now(),
+              });
+              setUserProfile((prev) => ({
+                ...prev,
+                uid: fbUser.uid,
+                displayName: fbUser.displayName || fbUser.email?.split('@')[0] || prev.displayName,
+                inviteCode: initialCode,
+              }));
+            }
+          } catch (e) {
+            console.warn('Could not sync user profile with Firestore:', e);
+          }
+        } else {
+          setCurrentUser(null);
+          try {
+            localStorage.removeItem('pooppal_has_session');
+          } catch {
+            // ignore
+          }
         }
+      } finally {
+        setIsAuthLoading(false);
+        clearTimeout(safetyTimer);
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      clearTimeout(safetyTimer);
+      unsubscribe();
+    };
   }, []);
 
   // Real-time Firestore sync for today's count
@@ -420,8 +445,15 @@ export default function App() {
         syncTileCount();
       }
     };
+    const handleWidgetSync = () => {
+      syncTileCount();
+    };
     document.addEventListener('visibilitychange', handleVisibility);
-    return () => document.removeEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('pooppal-sync-widget', handleWidgetSync);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('pooppal-sync-widget', handleWidgetSync);
+    };
   }, [todayKey, currentUser]);
 
   // Deep Link & Android App Launcher Shortcuts Handler
@@ -477,6 +509,7 @@ export default function App() {
       setIsDemoMode(false);
       try {
         localStorage.removeItem('pooppal_demo_mode');
+        localStorage.removeItem('pooppal_has_session');
       } catch {
         // ignore
       }
@@ -593,7 +626,27 @@ export default function App() {
     });
   };
 
-  const pairedFriend = friends.find((f) => f.uid === userProfile.pairedFriendUid);
+  const demoPairedFriend: FriendItem = {
+    uid: 'friend_sam',
+    displayName: 'SammySitz',
+    avatarId: 'mascot_coffee',
+    todayCount: 3,
+    statusBadge: 'Paired Widget Pal',
+    lastReactionIcon: 'Trophy',
+    isOnline: true,
+    isPaired: true,
+  };
+
+  const pairedFriend = friends.find((f) => f.uid === userProfile.pairedFriendUid) || demoPairedFriend;
+
+  // Real-time synchronization to Native Android Home Screen Widget
+  useEffect(() => {
+    if (window.AndroidNative?.updateWidgetData) {
+      const partnerName = pairedFriend?.displayName || 'SammySitz';
+      const partnerCount = pairedFriend?.todayCount ?? 3;
+      window.AndroidNative.updateWidgetData(todayKey, todayCount, partnerCount, partnerName);
+    }
+  }, [todayKey, todayCount, pairedFriend?.displayName, pairedFriend?.todayCount]);
 
   const handleSetPairedFriend = (uid: string) => {
     setUserProfile((prev) => ({
@@ -604,7 +657,21 @@ export default function App() {
 
   return (
     <AndroidFrame>
-      {!currentUser && !isDemoMode ? (
+      {isAuthLoading ? (
+        <div className="flex-1 w-full h-full flex flex-col items-center justify-center bg-[#FFFDF7] dark:bg-[#1E1715] text-[#4E342E] dark:text-[#FFE082] p-6 select-none animate-in fade-in duration-200">
+          <div className="flex flex-col items-center gap-4">
+            <PixelMascot size={88} mood="ready" animate={true} />
+            <div className="text-center space-y-1">
+              <h1 className="text-2xl font-black font-pixel tracking-wider text-[#4E342E] dark:text-[#FFE082]">
+                PoopPal
+              </h1>
+              <p className="text-xs text-[#8D6E63] dark:text-[#BCAAA4] font-medium animate-pulse">
+                Checking your session...
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : !currentUser && !isDemoMode ? (
         <AuthScreen
           onAuthSuccess={(_user, isExistingUser) => {
             setIsDemoMode(false);

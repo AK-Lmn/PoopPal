@@ -173,13 +173,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               <div className="flex items-center gap-2.5">
                 <AppIcon size={38} showBadge={false} />
                 <div>
-                  <div className="text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">PoopPal Companion</div>
-                  <div className="text-[10px] text-[#8D6E63]">2x2 Android Home Widget</div>
+                  <div className="text-xs font-bold text-[#4E342E] dark:text-[#FFF8E1]">PoopPal Duo Widget</div>
+                  <div className="text-[10px] text-[#8D6E63]">4x2 &amp; 2x2 Paired Android Widgets</div>
                 </div>
               </div>
 
-              <div className="px-2.5 py-1 bg-[#5D4037] text-white rounded-lg text-[10px] font-bold">
-                I POOPED!
+              <div className="px-2.5 py-1 bg-[#4E342E] text-white rounded-lg text-[10px] font-bold">
+                + Log My Poop
               </div>
             </div>
 
@@ -188,7 +188,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               onClick={() => setShowWidgetGuide(true)}
               className="w-full py-2 bg-[#5D4037] hover:bg-[#4E342E] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors"
             >
-              <LayoutGrid className="w-3.5 h-3.5" />
+              <Smartphone className="w-3.5 h-3.5" />
               <span>How to Add Widget to Home Screen</span>
             </button>
           </div>
