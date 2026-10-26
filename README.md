@@ -4,7 +4,7 @@
   <h1>PoopPal</h1>
 
   <p>
-    A retro 16-bit pixel buddy habit counter for Android featuring real-time friend synchronization, native home widgets, system pull-down tiles, and procedural retro sound effects.
+    A retro 16-bit pixel buddy habit counter for Android and iOS featuring real-time friend synchronization, companion widgets, and procedural retro sound effects.
   </p>
 
   <p>
@@ -75,7 +75,7 @@ PoopPal can be installed on any iPhone running iOS 15.0 or later without an Appl
 
 #### Option B: Direct Sideloading via `.ipa`
 
-1. Download `PoopPal.ipa` from the latest **[GitHub Releases](https://github.com/AK-Lmn/PoopPal/releases)** on your iPhone.
+1. Download `PoopPal.ipa` from the latest **[GitHub Releases](https://github.com/AK-Lmn/PoopPal/releases)** (direct download: **[PoopPal.ipa (v1.1.0)](https://github.com/AK-Lmn/PoopPal/releases/download/v1.1.0/PoopPal.ipa)**) on your iPhone.
 2. Open **AltStore**, navigate to the **My Apps** tab, and tap the **+** icon in the top-left corner.
 3. Select the downloaded `PoopPal.ipa`. AltStore will sign and install PoopPal.
 

@@ -12,9 +12,17 @@
       "tintColor": "4E342E",
       "versions": [
         {
+          "version": "1.1.0",
+          "date": "2026-10-26",
+          "size": 780437,
+          "downloadURL": "https://github.com/AK-Lmn/PoopPal/releases/download/v1.1.0/PoopPal.ipa",
+          "localizedDescription": "v1.1.0: Real-time paired friend synchronization, eliminated launch auth screen flash, iOS safe area layout enhancements, and AltStore sideloading support.",
+          "minOSVersion": "15.0"
+        },
+        {
           "version": "1.0.0",
           "date": "2026-10-26",
-          "size": 15000000,
+          "size": 780437,
           "downloadURL": "https://github.com/AK-Lmn/PoopPal/releases/download/v1.0.0/PoopPal.ipa",
           "localizedDescription": "Initial iOS Release with AltStore Classic sideloading support, real-time Firebase pairing, and retro audio/haptics.",
           "minOSVersion": "15.0"
@@ -26,6 +34,15 @@
     }
   ],
   "news": [
+    {
+      "title": "PoopPal v1.1.0 is Live!",
+      "identifier": "pooppal-v1-1-0",
+      "caption": "Live friend pairing, faster launch, and refined retro pixel interface.",
+      "date": "2026-10-26",
+      "tintColor": "4E342E",
+      "imageURL": "https://raw.githubusercontent.com/AK-Lmn/PoopPal/main/public/icon-512.png",
+      "appID": "com.pooppal.app"
+    },
     {
       "title": "Welcome to PoopPal for iPhone!",
       "identifier": "pooppal-launch",
