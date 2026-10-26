@@ -68,13 +68,49 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.1.0
-          name: PoopPal v1.1.0 - Paired Duo Home Screen Widgets & Live Sync
+          name: PoopPal v1.1.0 - Paired Duo Edition (Android & iOS)
           body: |
-            ### What's New in v1.1.0:
-            - **4x2 Paired Friend Home Screen Widget**: Live companion widget displaying joint daily flush metrics, pixel mascot companion with partner crown, and 1-tap quick logging.
-            - **2x2 Compact Duo Widget**: Dedicated 2x2 home screen widget with side-by-side counts and 1-tap logging.
-            - **Live Android Sync**: Background flushes logged via the widget or notification tile synchronize automatically with the app and Firestore.
+            ## PoopPal v1.1.0 - Paired Duo Edition (Android and iOS)
+
+            PoopPal v1.1.0 brings real-time paired friend synchronization, dedicated companion home screen widgets for Android, native iOS IPA builds for zero-fee sideloading via AltStore Classic, native Taptic Engine feedback, and elimination of launch authentication flicker.
+
+            ### What is New in v1.1.0:
+            - **iOS Sideloading Release (PoopPal.ipa)**: Standalone iOS binary with full iPhone notch / Dynamic Island support, native Taptic Engine haptics, and zero $99/year fee requirement.
+            - **AltStore Classic 1-Click Source**: iPhone users can subscribe to updates directly inside AltStore.
+            - **Android Native Home Screen Widgets**:
+              - **4x2 Paired Friend Widget**: Live companion widget displaying joint daily flush metrics, pixel mascot companion with partner crown, and 1-tap quick logging.
+              - **2x2 Compact Duo Widget**: Dedicated 2x2 widget with side-by-side counts and 1-tap logging.
+            - **Live Background Sync**: Background flushes logged via the widget or notification tile synchronize automatically with the app and Firestore.
             - **Eliminated Auth Flash**: Added authentication gate and loading splash preventing sign-in screen flashes on app launch.
+
+            ### Installation Instructions
+
+            #### Android Installation (.apk):
+            1. Download `PoopPal.apk` from the **Assets** section below.
+            2. Open the file on your Android device.
+            3. If prompted, enable **Install unknown apps** for this source.
+            4. Tap **Install** (or **Update** if updating an existing version - your data is preserved).
+            5. Add the **4x2 Duo** or **2x2 Compact** widget from your home screen widget menu.
+
+            #### iOS Installation (.ipa):
+            PoopPal can be installed on any iPhone running iOS 15.0 or later without an Apple Developer subscription ($99/yr) using **AltStore Classic** or **Sideloadly**.
+
+            ##### Method 1: AltStore Classic 1-Tap Source (Recommended)
+            1. Ensure **AltStore Classic** is installed on your iPhone (https://altstore.io).
+            2. Tap the one-click source link on your iPhone:
+               `altstore://source?url=https://raw.githubusercontent.com/AK-Lmn/PoopPal/main/altstore.json`
+            3. Tap **FREE** or **INSTALL** next to **PoopPal** in the My Apps / Browse tab.
+
+            ##### Method 2: Sideloadly (Windows / Mac)
+            1. Download `PoopPal.ipa` from the **Assets** section below.
+            2. Connect your iPhone to your computer via USB.
+            3. Drag `PoopPal.ipa` into **Sideloadly** (https://sideloadly.io).
+            4. Enter your free Apple ID and click **Start**.
+
+            ##### Method 3: Direct AltStore Sideloading
+            1. Download `PoopPal.ipa` on your iPhone.
+            2. In AltStore, go to **My Apps** and tap the **+** icon in the top corner.
+            3. Select `PoopPal.ipa` to sign and install.
           files: android/app/build/outputs/apk/debug/PoopPal.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
