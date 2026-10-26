@@ -11,6 +11,9 @@
     <a href="#download--installation">
       <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white" alt="Platform: Android" />
     </a>
+    <a href="#ios-installation-via-altstore-classic">
+      <img src="https://img.shields.io/badge/Platform-iOS-000000?style=flat-square&logo=apple&logoColor=white" alt="Platform: iOS" />
+    </a>
     <a href="https://github.com/AK-Lmn/PoopPal/releases/tag/v1.0.0">
       <img src="https://img.shields.io/badge/Release-v1.0.0-blue?style=flat-square" alt="Release: v1.0.0" />
     </a>
@@ -44,9 +47,9 @@ Designed from the ground up for mobile devices, PoopPal delivers a lightweight, 
 
 ## Download & Installation
 
-PoopPal is distributed directly as an Android application package (`.apk`).
+PoopPal is distributed directly as an Android application package (`.apk`) and as an iOS package (`.ipa`) for sideloading via AltStore Classic.
 
-### Quick Start via GitHub Releases
+### Android Installation (`.apk`)
 
 1. Navigate to the **[Releases](https://github.com/AK-Lmn/PoopPal/releases)** tab of this repository.
 2. Under the latest release **Assets**, download `PoopPal.apk`.
@@ -55,6 +58,29 @@ PoopPal is distributed directly as an Android application package (`.apk`).
    - Select **Settings** and enable **Allow from this source** (or **Install unknown apps**).
    - Return to the installer and tap **Install**.
 5. Launch **PoopPal** from your app drawer.
+
+### iOS Installation via AltStore Classic (`.ipa`)
+
+PoopPal can be installed on any iPhone running iOS 15.0 or later without an Apple Developer subscription ($99/yr) using **AltStore Classic**.
+
+#### Option A: One-Tap AltStore Source (Recommended)
+
+1. Ensure **AltStore Classic** is installed on your iPhone (via [altstore.io](https://altstore.io)).
+2. Tap the one-click source link on your iPhone:
+   👉 **[Add PoopPal to AltStore](altstore://source?url=https://raw.githubusercontent.com/AK-Lmn/PoopPal/main/altstore.json)**
+3. Or manually in AltStore:
+   - Open the **Sources** tab and tap **+** in the top-right corner.
+   - Enter source URL: `https://raw.githubusercontent.com/AK-Lmn/PoopPal/main/altstore.json`
+4. Tap **FREE** or **INSTALL** next to **PoopPal** in the My Apps / Browse tab.
+
+#### Option B: Direct Sideloading via `.ipa`
+
+1. Download `PoopPal.ipa` from the latest **[GitHub Releases](https://github.com/AK-Lmn/PoopPal/releases)** on your iPhone.
+2. Open **AltStore**, navigate to the **My Apps** tab, and tap the **+** icon in the top-left corner.
+3. Select the downloaded `PoopPal.ipa`. AltStore will sign and install PoopPal.
+
+> [!NOTE]
+> **Free Apple ID 7-Day Refresh Policy:** Free Apple IDs have a 7-day personal provisioning limit. AltStore automatically refreshes PoopPal in the background whenever your iPhone is on the same Wi-Fi network as your computer running AltServer. You can also tap **Refresh All** inside AltStore at any time.
 
 ---
 

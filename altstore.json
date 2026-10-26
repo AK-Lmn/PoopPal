@@ -1,0 +1,39 @@
+{
+  "name": "PoopPal AltStore Source",
+  "identifier": "com.pooppal.source",
+  "apps": [
+    {
+      "name": "PoopPal",
+      "bundleIdentifier": "com.pooppal.app",
+      "developerName": "Kim Lamano",
+      "subtitle": "Retro 16-bit Social Poop Tracker",
+      "localizedDescription": "PoopPal is a retro 16-bit pixel buddy social poop counter with paired friend sync and home-screen companion widget. Track daily habits, share milestones with your partner or squad, and keep healthy with zero spam.",
+      "iconURL": "https://raw.githubusercontent.com/AK-Lmn/PoopPal/main/public/icon-512.png",
+      "tintColor": "4E342E",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "date": "2026-10-26",
+          "size": 15000000,
+          "downloadURL": "https://github.com/AK-Lmn/PoopPal/releases/download/v1.0.0/PoopPal.ipa",
+          "localizedDescription": "Initial iOS Release with AltStore Classic sideloading support, real-time Firebase pairing, and retro audio/haptics.",
+          "minOSVersion": "15.0"
+        }
+      ],
+      "appPermissions": {
+        "entitlements": []
+      }
+    }
+  ],
+  "news": [
+    {
+      "title": "Welcome to PoopPal for iPhone!",
+      "identifier": "pooppal-launch",
+      "caption": "Track daily flushes with your squad on iOS without App Store fees.",
+      "date": "2026-10-26",
+      "tintColor": "4E342E",
+      "imageURL": "https://raw.githubusercontent.com/AK-Lmn/PoopPal/main/public/icon-512.png",
+      "appID": "com.pooppal.app"
+    }
+  ]
+}
